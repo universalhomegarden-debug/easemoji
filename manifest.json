@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "Ease-Moji",
+  "short_name": "Ease-Moji",
+  "version": "1.0.0",
+  "description": "The easiest way to insert emojis into web posts, emails, and anywhere you type.",
+  "homepage_url": "https://github.com/your-org/ease-moji",
+  "author": "Ease-Moji Team",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "alarms"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "src/background/service-worker.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/ease-moji.js"],
+      "css": ["src/content/ease-moji.css"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["src/lib/*", "src/content/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Ease-Moji",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+
+  "minimum_chrome_version": "88"
+}

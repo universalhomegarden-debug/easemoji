@@ -1,0 +1,265 @@
+/* ─── Ease-Moji Content Styles ────────────────────────────────────── */
+/* Injected into web pages — all selectors prefixed with em- */
+
+.em-btn,
+.em-panel {
+  --em-bg: #ffffff;
+  --em-surface: #f1f5f9;
+  --em-border: #e2e8f0;
+  --em-text: #0f172a;
+  --em-text-dim: #64748b;
+  --em-accent: #2563eb;
+  --em-accent-hover: #1d4ed8;
+  --em-hover: #e2e8f0;
+  --em-shadow: rgba(0, 0, 0, 0.12);
+  --em-radius: 12px;
+  --em-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Twemoji Mozilla', sans-serif;
+}
+
+.em-dark {
+  --em-bg: #111827;
+  --em-surface: #1f2937;
+  --em-border: #374151;
+  --em-text: #f9fafb;
+  --em-text-dim: #9ca3af;
+  --em-accent: #60a5fa;
+  --em-accent-hover: #93c5fd;
+  --em-hover: #374151;
+  --em-shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* ── Floating Button ─────────────────────────────────────────── */
+
+.em-btn {
+  position: fixed;
+  z-index: 2147483647;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--em-accent);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px var(--em-shadow);
+  transition: transform 0.15s, opacity 0.15s;
+  opacity: 0;
+  pointer-events: none;
+  font-family: var(--em-font) !important;
+  line-height: 1;
+}
+
+.em-btn.visible { opacity: 1; pointer-events: auto; }
+.em-btn:hover { transform: scale(1.1); }
+
+/* ── Panel ───────────────────────────────────────────────────── */
+
+.em-panel {
+  position: fixed;
+  z-index: 2147483647;
+  width: 340px;
+  max-height: 420px;
+  background: var(--em-bg);
+  border: 1px solid var(--em-border);
+  border-radius: var(--em-radius);
+  box-shadow: 0 8px 32px var(--em-shadow);
+  display: none;
+  flex-direction: column;
+  font-family: var(--em-font) !important;
+  overflow: hidden;
+  animation: emFadeIn 0.15s ease;
+}
+
+.em-panel.open { display: flex; }
+
+@keyframes emFadeIn {
+  from { opacity: 0; transform: translateY(-4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Search ──────────────────────────────────────────────────── */
+
+.em-search-wrap { padding: 8px 10px; border-bottom: 1px solid var(--em-border); flex-shrink: 0; }
+
+.em-search {
+  width: 100%; padding: 8px 12px;
+  border: 1px solid var(--em-border); border-radius: 8px;
+  background: var(--em-surface); color: var(--em-text);
+  font-size: 13px; font-family: var(--em-font);
+  outline: none; box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.em-search:focus { border-color: var(--em-accent); }
+.em-search::placeholder { color: var(--em-text-dim); }
+
+/* ── Tabs ────────────────────────────────────────────────────── */
+
+.em-tabs {
+  display: flex; gap: 2px;
+  padding: 6px 10px; border-bottom: 1px solid var(--em-border);
+  overflow-x: auto; overflow-y: hidden;
+  flex-shrink: 0; scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch; white-space: nowrap;
+}
+.em-tabs::-webkit-scrollbar { height: 3px; }
+.em-tabs::-webkit-scrollbar-thumb { background: var(--em-border); border-radius: 2px; }
+
+.em-tab {
+  flex-shrink: 0; padding: 4px 10px;
+  border: none; background: transparent;
+  color: var(--em-text-dim); font-size: 11px; font-weight: 500;
+  font-family: var(--em-font) !important; cursor: pointer;
+  border-radius: 6px; white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+
+.em-tab:hover { background: var(--em-hover); color: var(--em-text); }
+.em-tab.active { background: var(--em-accent); color: #fff; }
+
+/* ── Emoji Grid ──────────────────────────────────────────────── */
+
+.em-grid-wrap { flex: 1; overflow-y: auto; padding: 8px; scrollbar-width: thin; }
+
+.em-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 2px; }
+
+.em-cell {
+  width: 100%; aspect-ratio: 1;
+  border: none; background: transparent;
+  font-size: 22px;
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Twemoji Mozilla', sans-serif !important;
+  cursor: pointer; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.1s, transform 0.1s;
+  padding: 0; line-height: 1;
+}
+
+.em-cell:hover { background: var(--em-hover); transform: scale(1.2); }
+
+.em-panel.em-size-small .em-cell { font-size: 18px; }
+.em-panel.em-size-large .em-cell { font-size: 26px; }
+
+/* ── Sticker Grid (Premium) ──────────────────────────────────── */
+
+.em-sticker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 8px; }
+
+.em-sticker {
+  width: 100%; aspect-ratio: 1;
+  border: 1px solid var(--em-border);
+  background: var(--em-surface); border-radius: 8px;
+  cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  overflow: hidden; transition: transform 0.12s, border-color 0.12s;
+  padding: 4px;
+}
+
+.em-sticker:hover { transform: scale(1.08); border-color: var(--em-accent); }
+
+.em-sticker img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+
+.em-sticker-label {
+  font-size: 9px; color: var(--em-text-dim);
+  text-align: center; padding: 2px 0;
+  grid-column: 1 / -1;
+}
+
+/* ── GIF Grid (Premium) ──────────────────────────────────────── */
+
+.em-gif-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 8px; }
+
+.em-gif-card {
+  width: 100%; aspect-ratio: 1.35;
+  border: 1px solid var(--em-border);
+  background: var(--em-surface); border-radius: 8px;
+  cursor: pointer; overflow: hidden; padding: 0;
+  transition: transform 0.12s, border-color 0.12s;
+}
+
+.em-gif-card:hover { transform: scale(1.03); border-color: var(--em-accent); }
+
+.em-gif-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.em-loading {
+  grid-column: 1 / -1; text-align: center; padding: 20px;
+  color: var(--em-text-dim); font-size: 12px;
+}
+
+/* ── Dictionary & Thesaurus (Top Tier) ────────────────────────── */
+
+.em-word-panel {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 10px; color: var(--em-text);
+}
+
+.em-word-title {
+  font-size: 14px; font-weight: 700;
+  padding-bottom: 6px; border-bottom: 1px solid var(--em-border);
+}
+
+.em-word-section h4 {
+  margin: 0 0 6px; font-size: 11px; font-weight: 700;
+  color: var(--em-text-dim); text-transform: uppercase;
+}
+
+.em-word-section p {
+  margin: 0; font-size: 12px; line-height: 1.4;
+  color: var(--em-text);
+}
+
+.em-word-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.em-word-chip {
+  border: 1px solid var(--em-border); background: var(--em-surface);
+  color: var(--em-text); border-radius: 999px; padding: 4px 8px;
+  font-size: 12px; font-family: var(--em-font) !important; cursor: pointer;
+}
+
+.em-word-chip:hover { border-color: var(--em-accent); color: var(--em-accent); }
+
+/* ── Section Headers ─────────────────────────────────────────── */
+
+.em-section-header {
+  grid-column: 1 / -1; font-size: 11px; font-weight: 600;
+  color: var(--em-text-dim); text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 6px 2px 2px;
+}
+
+.em-section-header.recent { color: var(--em-accent); }
+
+/* ── Premium overlay ─────────────────────────────────────────── */
+
+.em-premium-overlay {
+  grid-column: 1 / -1; text-align: center; padding: 16px;
+  color: var(--em-text-dim); font-size: 12px;
+  border: 1px dashed var(--em-border); border-radius: 8px; margin: 4px 0;
+}
+
+.em-premium-link { color: var(--em-accent); cursor: pointer; text-decoration: underline; font-weight: 500; }
+
+/* ── No results ──────────────────────────────────────────────── */
+
+.em-no-results {
+  grid-column: 1 / -1; text-align: center; padding: 24px 16px;
+  color: var(--em-text-dim); font-size: 13px;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+
+.em-panel-footer {
+  padding: 6px 10px; border-top: 1px solid var(--em-border);
+  display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+}
+
+.em-panel-footer span { font-size: 11px; color: var(--em-text-dim); }
+.em-panel-footer a { font-size: 11px; color: var(--em-accent); text-decoration: none; cursor: pointer; }
+.em-panel-footer a:hover { text-decoration: underline; }
+
+.em-badge {
+  font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 4px;
+  background: #f59e0b; color: #78350f;
+  text-transform: uppercase; letter-spacing: 0.3px;
+}
+.em-badge.top { background: #2563eb; color: #eff6ff; }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ease-Moji Settings</title>
+  <style>
+    :root { --bg: #0f172a; --card: #1e293b; --border: #334155; --text: #f1f5f9; --text-dim: #94a3b8; --accent: #8b5cf6; --green: #22c55e; --amber: #f59e0b; --radius: 12px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; padding: 32px 16px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    h1 { text-align: center; font-size: 24px; margin-bottom: 4px; }
+    .sub { text-align: center; color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+    .card h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .setting { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; gap: 12px; }
+    .setting + .setting { border-top: 1px solid rgba(51,65,85,0.5); }
+    .setting label { font-weight: 500; }
+    .setting p { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+    select { background: #334155; color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 13px; font-family: var(--font); cursor: pointer; outline: none; }
+    select:focus { border-color: var(--accent); }
+    .btn { padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; font-family: var(--font); transition: 0.12s; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #7c3aed; }
+    .btn-amber { background: var(--amber); color: #78350f; }
+    .btn-amber:hover { background: #d97706; }
+    .plan { display: flex; gap: 12px; margin-bottom: 12px; }
+    .plan-card { flex: 1; border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+    .plan-card.featured { border-color: var(--accent); }
+    .plan-card h3 { font-size: 16px; margin-bottom: 4px; }
+    .plan-card .price { font-size: 22px; font-weight: 700; color: var(--accent); }
+    .plan-card .price span { font-size: 13px; color: var(--text-dim); }
+    .plan-card ul { list-style: none; font-size: 12px; color: var(--text-dim); margin: 10px 0; }
+    .plan-card ul li { padding: 3px 0; }
+    .plan-card ul li::before { content: '✓ '; color: var(--green); }
+    .disabled { opacity: 0.4; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>😀 Ease-Moji</h1>
+    <p class="sub">Settings &amp; Premium</p>
+
+    <div class="card">
+      <h2>Appearance</h2>
+      <div class="setting">
+        <div><label>Theme</label><p>Light, dark, or system default</p></div>
+        <select id="themeSelect">
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <div class="setting">
+        <div><label>Emoji size</label><p>Size in the picker panel</p></div>
+        <select id="sizeSelect">
+          <option value="small">Small</option>
+          <option value="medium" selected>Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Premium Plans</h2>
+      <div class="plan">
+        <div class="plan-card">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>500+ emojis</li>
+            <li>Search Feature</li>
+            <li>Light / Dark / System</li>
+          </ul>
+          <button class="btn btn-primary" disabled>Current</button>
+        </div>
+        <div class="plan-card featured">
+          <h3>Basic</h3>
+          <div class="price">$1.99 <span>/mo</span></div>
+          <ul>
+            <li>All Free features +</li>
+            <li>Flags &amp; country emojis</li>
+            <li>Skin tone variants</li>
+            <li>PNG emoji art Stickers</li>
+          </ul>
+          <button class="btn btn-amber" id="basicPremiumBtn">Upgrade</button>
+        </div>
+        <div class="plan-card featured">
+          <h3>Premium</h3>
+          <div class="price">$4.99 <span>/mo</span></div>
+          <ul>
+            <li>All features unlocked</li>
+            <li>Larger premium emoji set</li>
+            <li>Extra sticker designs</li>
+            <li>Early access to new features</li>
+            <li>No ads</li>
+          </ul>
+          <button class="btn btn-primary" id="topTierBtn">Upgrade</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="activePlanCard" style="display:none">
+      <h2>Your Plan</h2>
+      <p id="activePlanText">Free plan active</p>
+      <button class="btn" id="deactivateBtn" style="margin-top:8px;background:#ef4444;color:#fff">Deactivate</button>
+    </div>
+
+    <div class="card" style="border-color:var(--accent)">
+      <h2>🔑 License Key</h2>
+      <p style="font-size:12px;color:var(--text-dim);margin-bottom:10px">
+        Already purchased? Enter your license key below to unlock features.
+      </p>
+      <div style="display:flex;gap:8px">
+        <input id="licenseInput" type="text" placeholder="EM-XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX"
+          style="flex:1;background:#334155;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:13px;font-family:var(--font);outline:none" />
+        <button class="btn btn-primary" id="activateBtn">Activate</button>
+      </div>
+      <p id="licenseStatus" style="font-size:12px;margin-top:8px;color:var(--text-dim)"></p>
+    </div>
+
+    <div class="card" style="border-color:var(--accent);text-align:center">
+      <h2>💛 Support Ease-Moji</h2>
+      <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">
+        If you find this extension useful, consider buying me a coffee!
+      </p>
+      <a href="https://paypal.me/JoshuaLeeWarner" target="_blank" rel="noopener" class="btn btn-primary" style="display:inline-block;text-decoration:none;padding:12px 28px;font-size:14px">
+        ☕ Donate with PayPal
+      </a>
+    </div>
+
+    <footer style="text-align:center;font-size:12px;color:var(--text-dim);padding:20px">
+      Ease-Moji v1.0.0 &middot; All emojis processed locally
+    </footer>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

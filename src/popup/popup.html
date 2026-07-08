@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ease-Moji</title>
+  <style>
+    :root { --bg: #fff; --surface: #f1f5f9; --border: #e2e8f0; --text: #0f172a; --text-dim: #64748b; --accent: #8b5cf6; --radius: 10px; --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #1e293b; --surface: #0f172a; --border: #334155; --text: #f1f5f9; --text-dim: #94a3b8; }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { width: 340px; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .brand { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+    .brand span { font-size: 18px; }
+    .header-actions { display: flex; gap: 4px; }
+    .icon-btn { width: 28px; height: 28px; border: none; background: transparent; border-radius: 6px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; color: var(--text-dim); }
+    .icon-btn:hover { background: var(--surface); }
+    .search-wrap { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+    .search-wrap input { width: 100%; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--text); font-size: 13px; font-family: var(--font); outline: none; }
+    .search-wrap input:focus { border-color: var(--accent); }
+    .grid { padding: 6px; display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; }
+    .grid button { aspect-ratio: 1; border: none; background: transparent; font-size: 22px; cursor: pointer; border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: background 0.1s; }
+    .grid button:hover { background: var(--surface); transform: scale(1.15); }
+    .footer { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-dim); }
+    .footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
+    .section-h { grid-column: 1 / -1; font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 2px; }
+    .no-results { grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--text-dim); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand"><span>😀</span> Ease-Moji</div>
+    <div class="header-actions">
+      <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search emojis..." />
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="footer">
+    <span>Quick picker</span>
+    <a id="upgradeLink">Premium</a>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
