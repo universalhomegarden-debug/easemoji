@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ease-moji-backend
+    runtime: node
+    repo: https://github.com/universalhomegarden-debug/easemoji
+    branch: main
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: NODE_VERSION
+        value: "20"
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: BASIC_PRICE_ID
+        sync: false
+      - key: PREMIUM_PRICE_ID
+        sync: false
